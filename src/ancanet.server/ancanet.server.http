@@ -1,0 +1,6 @@
+@ancanet.server_HostAddress = http://localhost:5053
+
+GET {{ancanet.server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

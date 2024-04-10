@@ -1,10 +1,10 @@
 ﻿using Microsoft.OpenApi.Models;
 
-namespace ancanet.server.Configurations
+namespace ancanet.server.Swagger
 {
-    public static class CustomSwaggerGenExtension
+    public static class ConfiguredSwaggerGenExtension
     {
-        public static  IServiceCollection AddCustomSwaggerGen(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddConfiguredSwaggerGen(this IServiceCollection serviceCollection)
         {
             return serviceCollection.AddSwaggerGen(opt =>
             {

@@ -2,8 +2,8 @@
 
 namespace ancanet.server.Models
 {
-    public class AppUser : IdentityUser 
+    public class AppUser : IdentityUser
     {
-    
+        // Additional Columns for User Table
     }
 }

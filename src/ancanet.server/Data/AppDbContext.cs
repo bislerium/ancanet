@@ -7,6 +7,8 @@ namespace ancanet.server.Data
     public class AppDbContext(DbContextOptions<AppDbContext> options) :
             IdentityDbContext<AppUser>(options)
     {
-
+        
     }
+
+    
 }

@@ -1,6 +1,7 @@
 using ancanet.server.Data;
 using ancanet.server.Email.FluentEmail;
 using ancanet.server.Email.IdentityEmail;
+using ancanet.server.Identity.Ucpf;
 using ancanet.server.Models;
 using ancanet.server.Swagger;
 using Microsoft.AspNetCore.Identity;
@@ -15,11 +16,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddConfiguredSwaggerGen();
 
-//Email Setup
-builder.Services.AddConfiguredFluentEmail(builder.Configuration, isTest: true);
-builder.Services.AddTransientFluentEmailService();
-builder.Services.AddIdentityEmailSender();
-
 // Auth Setup
 builder.Services.AddAuthentication()
     .AddBearerToken(IdentityConstants.BearerScheme);
@@ -33,8 +29,18 @@ builder.Services.AddDbContext<AppDbContext>(
 // Identity Setup
 builder.Services.AddIdentityCore<AppUser>()
     .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders()
     .AddApiEndpoints();
 
+//Email Setup
+builder.Services.AddConfiguredFluentEmail(builder.Configuration, isTest: true);
+builder.Services.AddTransientFluentEmailService();
+builder.Services.AddIdentityEmailSender();
+
+//Identity Additional Claim Setup
+builder.Services.AddAdditionalUserClaimsPrincipalFactory();
+
+//Configure Identity
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Password settings.

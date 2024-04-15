@@ -2,8 +2,10 @@
 
 namespace ancanet.server.Models
 {
-    public class AppUser : IdentityUser
+    public sealed class AppUser : IdentityUser<Guid>
     {
         // Additional Columns for User Table
+        
+        public bool IsProfileConfigured { get; set; } 
     }
 }

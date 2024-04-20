@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ancanet.server.Data;
 
@@ -10,9 +11,11 @@ using ancanet.server.Data;
 namespace ancanet.server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240416141012_changes")]
+    partial class changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
@@ -164,7 +167,7 @@ namespace ancanet.server.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsProfileSetup")
+                    b.Property<bool>("IsProfileConfigured")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("LockoutEnabled")
@@ -217,11 +220,6 @@ namespace ancanet.server.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .IsUnicode(true)
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTimeOffset>("SentAt")
                         .HasColumnType("TEXT");
 
@@ -230,6 +228,10 @@ namespace ancanet.server.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("SentToId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

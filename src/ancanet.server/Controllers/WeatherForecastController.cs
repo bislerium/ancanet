@@ -26,5 +26,11 @@ namespace ancanet.server.Controllers
             })
             .ToArray();
         }
+
+        [HttpPost]
+        public IActionResult Do()
+        {
+            return CreatedAtRoute("GetWeatherForecast", new { });
+        }
     }
 }

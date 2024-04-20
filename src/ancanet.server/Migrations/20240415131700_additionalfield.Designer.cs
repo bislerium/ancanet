@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ancanet.server.Data;
 
@@ -10,9 +11,11 @@ using ancanet.server.Data;
 namespace ancanet.server.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240415131700_additionalfield")]
+    partial class additionalfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
@@ -164,7 +167,7 @@ namespace ancanet.server.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<bool>("IsProfileSetup")
+                    b.Property<bool>("IsProfileConfigured")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("LockoutEnabled")
@@ -210,58 +213,6 @@ namespace ancanet.server.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("ancanet.server.Models.Message", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .IsUnicode(true)
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTimeOffset>("SentAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SentById")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SentToId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SentById");
-
-                    b.HasIndex("SentToId");
-
-                    b.ToTable("Messages");
-                });
-
-            modelBuilder.Entity("ancanet.server.Models.UserProfile", b =>
-                {
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("TEXT")
-                        .HasColumnName("Id");
-
-                    b.Property<DateOnly>("DateOfBirth")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Gender")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("AppUserId");
-
-                    b.ToTable("UserProfiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -313,48 +264,6 @@ namespace ancanet.server.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ancanet.server.Models.Message", b =>
-                {
-                    b.HasOne("ancanet.server.Models.UserProfile", "SentBy")
-                        .WithMany("ReceivedMessages")
-                        .HasForeignKey("SentById")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ancanet.server.Models.UserProfile", "SentTo")
-                        .WithMany("SentMessages")
-                        .HasForeignKey("SentToId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SentBy");
-
-                    b.Navigation("SentTo");
-                });
-
-            modelBuilder.Entity("ancanet.server.Models.UserProfile", b =>
-                {
-                    b.HasOne("ancanet.server.Models.AppUser", "AppUser")
-                        .WithOne("UserProfile")
-                        .HasForeignKey("ancanet.server.Models.UserProfile", "AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("AppUser");
-                });
-
-            modelBuilder.Entity("ancanet.server.Models.AppUser", b =>
-                {
-                    b.Navigation("UserProfile");
-                });
-
-            modelBuilder.Entity("ancanet.server.Models.UserProfile", b =>
-                {
-                    b.Navigation("ReceivedMessages");
-
-                    b.Navigation("SentMessages");
                 });
 #pragma warning restore 612, 618
         }

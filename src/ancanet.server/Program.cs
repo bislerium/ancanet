@@ -1,8 +1,11 @@
+using ancanet.server;
 using ancanet.server.Data;
 using ancanet.server.Email.FluentEmail;
 using ancanet.server.Email.IdentityEmail;
 using ancanet.server.Identity.Ucpf;
+using ancanet.server.Middlewares;
 using ancanet.server.Models;
+using ancanet.server.SignalR.Hubs;
 using ancanet.server.Swagger;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +31,7 @@ builder.Services.AddDbContext<AppDbContext>(
 
 // Identity Setup
 builder.Services.AddIdentityCore<AppUser>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders()
     .AddApiEndpoints();
@@ -56,15 +60,23 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Lockout.MaxFailedAccessAttempts = 5;
     options.Lockout.AllowedForNewUsers = true;
 
+    //Signin settings.
+    options.SignIn.RequireConfirmedEmail = AncanetConsts.RequireConfirmedEmail;
+
     // User settings.
     options.User.AllowedUserNameCharacters =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
     options.User.RequireUniqueEmail = true;
 });
 
+// Add SignalR
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
-app.MapIdentityApi<AppUser>();
+app
+    .MapGroup("Account")
+    .MapIdentityApi<AppUser>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -75,7 +87,11 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//app.UseProfileConfigureRedirection();
+
 app.UseAuthorization();
+
+app.MapHub<ChatHub>("/chat");
 
 app.MapControllers();
 

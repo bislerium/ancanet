@@ -7,6 +7,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{968ADD58-7A7
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ancanet.server", "src\ancanet.server\ancanet.server.csproj", "{29593D93-6F4C-47C4-8A3E-DF6BEE649BFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ancanet.client", "src\ancanet.client\ancanet.client.csproj", "{6CC0B937-4597-4CEC-AAF3-482E3402B98A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +19,17 @@ Global
 		{29593D93-6F4C-47C4-8A3E-DF6BEE649BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29593D93-6F4C-47C4-8A3E-DF6BEE649BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29593D93-6F4C-47C4-8A3E-DF6BEE649BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CC0B937-4597-4CEC-AAF3-482E3402B98A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CC0B937-4597-4CEC-AAF3-482E3402B98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CC0B937-4597-4CEC-AAF3-482E3402B98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC0B937-4597-4CEC-AAF3-482E3402B98A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{29593D93-6F4C-47C4-8A3E-DF6BEE649BFE} = {968ADD58-7A7B-4ECF-80B7-65170A03851A}
+		{6CC0B937-4597-4CEC-AAF3-482E3402B98A} = {968ADD58-7A7B-4ECF-80B7-65170A03851A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90C68CAE-4C57-4C0C-B184-29189BCFA8B7}

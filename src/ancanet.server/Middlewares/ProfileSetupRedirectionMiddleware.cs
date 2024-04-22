@@ -8,7 +8,7 @@ public class ProfileSetupRedirectionMiddleware(AppDbContext dbContext) : IMiddle
 {
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
-        if (!(context.User.Identity?.IsAuthenticated ?? false)
+        if (!context.IsUserAuthenticated()
             || AncanetConsts.PathExclusionsFromProfileSetup.Any(x => context.Request.Path.StartsWithSegments(x, StringComparison.OrdinalIgnoreCase)))
         {
             await next(context);

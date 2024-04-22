@@ -20,9 +20,7 @@ public class AdditionalUserClaimsPrincipalFactory(
         {
             user.TwoFactorEnabled 
                 ? new Claim("amr", "mfa") 
-                : new Claim("amr", "pwd"),
-            new Claim( AncanetConsts.Claims.IsProfileSetup.Type, user.IsProfileSetup.ToString(), AncanetConsts.Claims.IsProfileSetup.ValueType),
-            new Claim(AncanetConsts.Claims.IsEmailConfirmed.Type, user.EmailConfirmed.ToString(), AncanetConsts.Claims.IsEmailConfirmed.ValueType)
+                : new Claim("amr", "pwd")
         };
         
         identity.AddClaims(claims);

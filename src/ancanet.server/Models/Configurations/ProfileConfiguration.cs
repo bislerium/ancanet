@@ -8,8 +8,6 @@ namespace ancanet.server.Models.Configurations
     {
         public void Configure(EntityTypeBuilder<UserProfile> builder)
         {
-            //builder.HasKey(x => x.AppUserId);
-
             builder
                 .Property(e => e.Gender)
                 .HasConversion(

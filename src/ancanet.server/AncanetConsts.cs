@@ -8,10 +8,7 @@ public static class AncanetConsts
     public static readonly Assembly Assembly = typeof(Program).Assembly;
 
     public const string ProfileSetupURL = "/account/setup";
-    public static readonly string[] ExclusionsFromProfileSetup = [ProfileSetupURL];
-    
-    public const string ResendConfirmationEmail = "/Account/resendConfirmationEmail";
-    //public static readonly string[] ExclusionsFromEmailConfirmation = [ResendConfirmationEmail];
+    public static readonly string[] PathExclusionsFromProfileSetup = [ProfileSetupURL];
 
     public static class  Claims
     {

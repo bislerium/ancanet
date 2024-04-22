@@ -72,6 +72,21 @@ builder.Services.Configure<IdentityOptions>(options =>
 // Add SignalR
 builder.Services.AddSignalR();
 
+//Custom Factory-based Middleware registration
+builder.Services.AddProfileSetupRedirection();
+
+//CORS Enable
+builder.Services.AddCors(
+    options =>
+    {
+        options.AddDefaultPolicy(policy  =>
+        {
+            policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+        });
+    });
+
 var app = builder.Build();
 
 app
@@ -87,7 +102,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseProfileConfigureRedirection();
+app.UseCors();
+
+app.UseProfileSetupRedirection();
 
 app.UseAuthorization();
 
